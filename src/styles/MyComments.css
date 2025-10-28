@@ -1,0 +1,81 @@
+.mycomments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.mycomment-item {
+  background: var(--card, rgba(255, 255, 255, 0.95));
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--muted, #666);
+}
+
+.comment-post-title {
+  cursor: pointer;
+  color: var(--primary, #2563eb);
+  font-weight: 600;
+}
+
+.comment-post-title:hover {
+  text-decoration: underline;
+}
+
+.comment-content {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text, #222);
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.edit-btn {
+  background: var(--primary, #2563eb);
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+.edit-area input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border, #ccc);
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}

@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "title": "React 게시판 시작!",
+      "content": "json-server 연동",
+      "id": "2"
+    },
+    {
+      "id": "fab5",
+      "title": "123",
+      "content": "123"
+    },
+    {
+      "id": "12c2",
+      "title": ";'",
+      "content": ";'"
+    },
+    {
+      "id": "efa8",
+      "title": "안녕하세요",
+      "content": "ㅋㅋ"
+    },
+    {
+      "id": "28b8",
+      "title": "ㅁㄴㅇ",
+      "content": "ㅁㄴㅇ"
+    }
+  ]
+}

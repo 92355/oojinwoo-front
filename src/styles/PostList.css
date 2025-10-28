@@ -1,0 +1,120 @@
+/* ========== 공통 리스트 스타일 ========== */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* 링크 전체 영역 클릭 가능하게 */
+.post-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-item {
+  background: var(--card, rgba(255, 255, 255, 0.9));
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.post-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.post-author {
+  font-size: 14px;
+  color: var(--muted, #666);
+  margin-top: 4px;
+  
+  padding-left: 20px;
+}
+
+/* ========== 내 게시글(MyPosts)용 버튼 정렬 ========== */
+.mypost-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mypost-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* ========== 버튼 스타일 공통화 ========== */
+.edit-btn,
+.delete-btn,
+.back-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.edit-btn {
+  background: var(--primary, #2563eb);
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #1e4ed8;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+.back-btn {
+  background: var(--border, #e5e7eb);
+  color: var(--text, #222);
+}
+
+.back-btn:hover {
+  background: #d1d5db;
+}
+
+/* ========== 상세 페이지용 버튼 그룹 ========== */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-input,
+.post-textarea {
+  border: 1px solid var(--border, #ccc);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 15px;
+  background: var(--card, #fff);
+  color: var(--text, #222);
+}
+
+.post-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
