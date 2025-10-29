@@ -100,7 +100,6 @@
 .dropdown-menu {
   position: absolute;
   top: 44px;
-  right: 0;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
