@@ -7,8 +7,18 @@ export default function PostList() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts().then((res) => setPosts(res.data));
-  }, []);
+  const load = async () => {
+    try {
+      const { data } = await getPosts(); // ✅ 비동기 호출
+      setPosts(data);
+    } catch (err) {
+      console.error("게시글 불러오기 실패:", err);
+      setPosts([]);
+    }
+  };
+  load();
+}, []);
+
 
   return (
     <div className="container" style={{ marginTop: 40 }}>

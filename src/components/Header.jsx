@@ -14,22 +14,26 @@ export default function Header() {
 
   // ✅ 로그인 정보 로드 및 동기화
   useEffect(() => {
-    const loadUser = () => {
-      const savedUser = localStorage.getItem("user");
-      const savedRole = localStorage.getItem("role");
-      setUser(savedUser ? JSON.parse(savedUser) : null);
-      setRole(savedRole || null);
-    };
+  const loadUser = () => {
+    const savedUser = localStorage.getItem("user");
+    const savedRole = localStorage.getItem("role");
+    setUser(savedUser ? JSON.parse(savedUser) : null);
+    setRole(savedRole || null);
+  };
 
-    // 처음 로드 시 실행
-    loadUser();
+  loadUser();
 
-    // 로그인/로그아웃 이벤트 감지
-    const handleStorageChange = () => loadUser();
-    window.addEventListener("storage", handleStorageChange);
+  // ✅ storage 이벤트 (다른 탭)
+  window.addEventListener("storage", loadUser);
+  // ✅ custom 이벤트 (같은 탭)
+  window.addEventListener("userChange", loadUser);
 
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  return () => {
+    window.removeEventListener("storage", loadUser);
+    window.removeEventListener("userChange", loadUser);
+  };
+}, []);
+
 
   // ✅ 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
