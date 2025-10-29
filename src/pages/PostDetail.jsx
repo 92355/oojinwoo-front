@@ -33,15 +33,23 @@ export default function PostDetail() {
     }
   }, []);
 
-  // ✅ 데이터 로드
+  // ✅ 게시글 & 댓글 불러오기
   const loadPost = async () => {
-    const { data } = await getPost(id);
-    setPost(data);
+    try {
+      const { data } = await getPost(id);
+      setPost(data);
+    } catch (err) {
+      console.error("게시글 불러오기 실패:", err);
+    }
   };
 
   const loadComments = async () => {
-    const { data } = await getComments(id);
-    setComments(data);
+    try {
+      const { data } = await getComments(id);
+      setComments(data);
+    } catch (err) {
+      console.error("댓글 불러오기 실패:", err);
+    }
   };
 
   useEffect(() => {
@@ -49,14 +57,47 @@ export default function PostDetail() {
     loadComments();
   }, [id]);
 
+  // ✅ 게시글 삭제
   const handleDelete = async () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
-    await deletePost(id);
-    nav("/posts");
+    try {
+      await deletePost(id);
+      alert("게시글이 삭제되었습니다.");
+      nav("/posts");
+    } catch (err) {
+      console.error("게시글 삭제 실패:", err);
+      alert("게시글 삭제 중 오류가 발생했습니다.");
+    }
+  };
+
+  // ✅ 댓글 등록
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createComment(id, { content: commentText });
+      setCommentText("");
+      await loadComments(); // 새 댓글 반영
+    } catch (err) {
+      console.error("댓글 등록 실패:", err);
+      alert("댓글 등록 중 오류가 발생했습니다.");
+    }
+  };
+
+  // ✅ 댓글 삭제
+  const handleCommentDelete = async (commentId) => {
+    if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
+    try {
+      await deleteComment(commentId);
+      await loadComments(); // 삭제 후 목록 갱신
+    } catch (err) {
+      console.error("댓글 삭제 실패:", err);
+      alert("댓글 삭제 중 오류가 발생했습니다.");
+    }
   };
 
   if (!post) return <p>불러오는 중...</p>;
 
+  // ✅ 권한 판별
   const isOwner =
     isLoggedIn &&
     (post.userId === user?.id || post.User?.id === user?.id);
@@ -72,7 +113,10 @@ export default function PostDetail() {
       {/* ✅ 수정/삭제 버튼 */}
       {canModify && (
         <div className="button-group">
-          <button className="edit-btn" onClick={() => nav(`/edit/${post.id}`)}>
+          <button
+            className="edit-btn"
+            onClick={() => nav(`/edit/${post.id}`)}
+          >
             수정
           </button>
           <button className="delete-btn" onClick={handleDelete}>
@@ -81,6 +125,7 @@ export default function PostDetail() {
         </div>
       )}
 
+      {/* ✅ 댓글 목록 및 작성 */}
       <div className="comments">
         <h3>댓글</h3>
 
@@ -119,10 +164,10 @@ export default function PostDetail() {
             <button className="edit-btn">등록</button>
           </form>
         ) : (
-          <p className="login-hint">💡 로그인 후 댓글을 작성할 수 있습니다.</p>
-          
+          <p className="login-hint">
+            💡 로그인 후 댓글을 작성할 수 있습니다.
+          </p>
         )}
-        
       </div>
     </div>
   );
