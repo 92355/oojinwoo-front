@@ -98,10 +98,11 @@ export default function Header() {
             ) : (
               <Link to="/login">로그인 / 회원가입</Link>
             )}
+            {/* ✅ 테마 토글은 nav 옆으로 분리 */}
+          <ThemeToggle />
           </nav>
 
-          {/* ✅ 테마 토글은 nav 옆으로 분리 */}
-          <ThemeToggle />
+          
         </div>
       </div>
     </header>

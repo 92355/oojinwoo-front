@@ -8,37 +8,45 @@
   z-index: 20;
 }
 
+/* 본문과 같은 중앙 폭을 유지 */
 .header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 12px 20px;
+  max-width: 900px;           /* ✅ 게시글 목록과 동일한 폭 */
+  margin: 0 auto;             /* ✅ 중앙 정렬 */           
+  padding: 14px 150px 20px 110px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  flex-wrap: nowrap; /* ✅ 한 줄 유지 */
 }
 
+/* 로고 */
 .header-logo {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--primary, #2563eb);
   cursor: pointer;
   margin: 0;
-  flex-shrink: 0; /* ✅ 로고 줄바꿈 방지 */
+  flex-shrink: 0;
+  
 }
 
-/* ========== 네비게이션 정렬 ========== */
+/* 메뉴 그룹 오른쪽 정렬 */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
+  gap: 16px; /* 메뉴 간 간격 */
 }
 
+.header-nav button.theme-toggle,
+.header-nav .theme-toggle {
+  margin-left: 8px; /* ✅ 글자와 살짝 띄우기 */
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+/* 링크 스타일 */
 .header-nav a {
   text-decoration: none;
-  color: var(--text, #f5f5f5);
+  color: var(--text, #222);
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -47,7 +55,7 @@
   color: var(--primary, #2563eb);
 }
 
-/* ========== 아바타 & 드롭다운 ========== */
+/* 프로필 아바타 */
 .avatar {
   width: 36px;
   height: 36px;
@@ -61,16 +69,11 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s ease;
 }
 
-.avatar:hover {
-  transform: scale(1.05);
-}
-
+/* 드롭다운 */
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
 .dropdown-menu {
@@ -97,52 +100,7 @@
   pointer-events: auto;
 }
 
-/* ========== 반응형 (작은 화면에서도 한 줄 유지) ========== */
-@media (max-width: 900px) {
-  .header-inner {
-    padding: 10px 12px;
-    gap: 12px;
-  }
-
-  .header-nav {
-    gap: 10px;
-  }
-
-  .header-logo {
-    font-size: 18px;
-  }
-
-  .avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 600px) {
-  .header-inner {
-    flex-wrap: wrap; /* ✅ 너무 좁을 때만 자동 줄바꿈 */
-    justify-content: center;
-  }
-
-  .header-logo {
-    flex-basis: 100%;
-    text-align: center;
-    margin-bottom: 4px;
-  }
-
-  .header-nav {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .header-nav a {
-    font-size: 14px;
-  }
-}
-
-/* ========== 다크모드 대응 ========== */
+/* ✅ 다크모드 대응 */
 [data-theme="dark"] .header {
   background: #1a1c22;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -156,4 +114,39 @@
   background: rgba(30, 33, 41, 0.98);
   color: #f1f1f1;
   border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 800px) {
+  .header-inner {
+    max-width: 100%;
+    padding: 12px 24px;
+  }
+
+  .header-logo {
+    font-size: 30px;
+  }
+
+  .header-nav {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+  }
+
+  .header-logo {
+    font-size: 18px;
+  }
+
+  .header-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
