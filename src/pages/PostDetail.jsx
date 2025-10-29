@@ -4,6 +4,9 @@ import { getPost, deletePost } from "../api/postApi";
 import { getComments, createComment, deleteComment } from "../api/commentApi";
 import "../styles/PostDetail.css";
 
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
 export default function PostDetail() {
   const { id } = useParams();
   const nav = useNavigate();
@@ -63,8 +66,10 @@ export default function PostDetail() {
   if (error) return <p>{error}</p>;
   if (!post) return <p>불러오는 중...</p>;
 
-  const isOwner = post.userId === user?.id || post.User?.id === user?.id;
-  const isAdmin = localStorage.getItem("role") === "admin";
+const isLoggedIn = !!token; // 로그인 여부
+const isOwner = isLoggedIn && (post.userId === user?.id || post.User?.id === user?.id);
+const isAdmin = isLoggedIn && role === "admin";
+
 
   return (
     <div className="post-detail">
@@ -72,7 +77,7 @@ export default function PostDetail() {
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-     {(isOwner || isAdmin) && (
+     {isLoggedIn && (isOwner || isAdmin) && (
   <div className="button-group">
     <button className="edit-btn" onClick={() => nav(`/edit/${post.id}`)}>
       수정
@@ -82,6 +87,7 @@ export default function PostDetail() {
     </button>
   </div>
 )}
+
 
 
       {/* ✅ 댓글 영역 */}
@@ -95,11 +101,15 @@ export default function PostDetail() {
             <div key={c.id} className="comment-item">
               <p className="comment-author">{c.User?.name}</p>
               <p className="comment-content">{c.content}</p>
-             {(user?.id === c.userId || localStorage.getItem("role") === "admin") && (
-              <button className="comment-delete" onClick={() => handleCommentDelete(c.id)}  >
-                삭제
-              </button>
-            )}
+             {isLoggedIn && (user?.id === c.userId || isAdmin) && (
+  <button
+    className="comment-delete"
+    onClick={() => handleCommentDelete(c.id)}
+  >
+    삭제
+  </button>
+)}
+
 
             </div>
           ))
