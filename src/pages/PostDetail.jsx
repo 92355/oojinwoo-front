@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPost, deletePost } from "../api/postApi";
 import { getComments, createComment, deleteComment } from "../api/commentApi";
-import "../style/PostDetail.css";
+import "../styles/PostDetail.css";
 
 export default function PostDetail() {
   const { id } = useParams();

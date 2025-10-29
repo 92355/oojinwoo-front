@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPosts, deletePost } from "../api/postApi";
-import "../style/PostList.css";
+import "../styles/PostList.css";
 
 export default function AdminPage() {
   const [posts, setPosts] = useState([]);
