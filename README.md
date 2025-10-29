@@ -1,16 +1,38 @@
-# React + Vite
+# 🪶 Mini-Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> React.js + Node.js + MySQL 기반의 풀스택 웹서비스 플랫폼  
+> 사용자 인증, 게시글·댓글 CRUD, 다크모드, 반응형 UI를 포함한 개인 프로젝트입니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 배포 링크
 
-## React Compiler
+- **Frontend:** [https://92355.github.io/oojinwoo-front](https://92355.github.io/oojinwoo-front)
+- **Backend (API):** [https://oojinwoo-server.onrender.com/api](https://oojinwoo-server.onrender.com/api)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📖 프로젝트 개요
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Mini-Platform**은 React와 Node.js를 활용해 제작한  
+**간단한 커뮤니티형 웹서비스**입니다.  
+사용자는 회원가입·로그인 후 게시글과 댓글을 작성할 수 있으며,  
+관리자는 모든 게시글/댓글을 관리할 수 있습니다.  
+
+이 프로젝트를 통해 **프론트-백엔드 연동 구조, JWT 인증, REST API 설계, 배포 파이프라인**을 직접 경험했습니다.
+
+---
+
+## 🧩 주요 기능 (Frontend 중심)
+
+| 기능 | 설명 |
+|------|------|
+| 🔐 **회원가입 / 로그인 / 로그아웃** | JWT 기반 인증, localStorage 저장, 로그인 상태 이벤트(`userChange`) 실시간 반영 |
+| 📰 **게시글 목록 / 상세보기** | API를 통한 게시글 불러오기, 동적 URL(`useParams`) |
+| ✏️ **게시글 작성 / 수정 / 삭제** | 로그인 상태에 따라 작성 가능, 관리자는 전체 수정/삭제 |
+| 💬 **댓글 CRUD** | 게시글 상세에서 댓글 작성·삭제 가능 |
+| 🌙 **다크 / 라이트 테마 전환** | `useTheme` 훅 + CSS 변수 기반 |
+| 🧭 **라우팅 및 접근 제어** | `React Router (HashRouter)` + `AuthRoute` |
+| 📱 **반응형 UI** | PC·모바일 모두 대응, sticky Header, hover 효과 |
+
+---
