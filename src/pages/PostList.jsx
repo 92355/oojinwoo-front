@@ -10,6 +10,8 @@ export default function PostList() {
   const load = async () => {
     try {
       const { data } = await getPosts(); // ✅ 비동기 호출
+      console.log("📦 서버 응답 데이터:", data);
+
       setPosts(data);
     } catch (err) {
       console.error("게시글 불러오기 실패:", err);
