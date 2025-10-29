@@ -15,13 +15,25 @@ export default function App() {
     <HashRouter>
       <Header />
       <Routes>
+        {/* ✅ 메인 페이지 */}
         <Route path="/" element={<PostList />} />
+
+        {/* ✅ 게시글 목록 페이지 (누락된 부분 추가) */}
+        <Route path="/posts" element={<PostList />} />
+
+        {/* ✅ 게시글 상세 페이지 */}
         <Route path="/posts/:id" element={<PostDetail />} />
+
+        {/* ✅ 인증 관련 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* ✅ 내 활동 */}
         <Route path="/myposts" element={<AuthRoute><MyPosts /></AuthRoute>} />
         <Route path="/mycomments" element={<AuthRoute><MyComments /></AuthRoute>} />
         <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
+
+        {/* ✅ 관리자 페이지 */}
         <Route path="/admin" element={<AuthRoute><AdminPage /></AuthRoute>} />
       </Routes>
     </HashRouter>
