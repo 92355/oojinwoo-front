@@ -65,12 +65,15 @@ export default function Header() {
                 <button onClick={() => nav("/myposts")}>내 게시글</button>
                  <button onClick={() => nav("/mycomments")}>내 댓글</button>
                 <button onClick={handleLogout}>로그아웃</button>
-                <button
-                  style={{ color: "crimson" }}
-                  onClick={() => nav("/profile")}
-                >
-                  회원탈퇴
-                </button>
+                {/* ✅ 관리자 메뉴 */}
+                {localStorage.getItem("role") === "admin" && (
+                    <>
+                      <hr style={{ margin: "6px 0" }} />
+                      <button onClick={() => nav("/admin")}>관리자 페이지</button>
+                    </>
+                  )}
+
+                <button style={{ color: "crimson" }} onClick={() => nav("/profile")}>회원탈퇴 </button>
               </div>
             </div>
           ) : (
