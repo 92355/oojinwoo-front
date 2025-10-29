@@ -102,7 +102,7 @@
 
 /* ✅ 다크모드 대응 */
 [data-theme="dark"] .header {
-  background: #1a1c22;
+  background: #013beb;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
