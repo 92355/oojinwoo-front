@@ -52,6 +52,7 @@ export default function PostForm() {
 
   return (
     <div className="container" style={{ marginTop: 40 }}>
+      <h1 >여기야 폼</h1>
       <h2>{id ? "게시글 수정" : "새 게시글 작성"}</h2>
 
       <form onSubmit={handleSubmit} className="post-form">

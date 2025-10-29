@@ -13,6 +13,7 @@ export default function PostList() {
   return (
     <div className="container" style={{ marginTop: 40 }}>
       <h2>게시글 목록</h2>
+      <h1 >여기야 리스트</h1>
       <div className="post-list">
         {posts.length === 0 ? (
           <p>게시글이 없습니다.</p>

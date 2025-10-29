@@ -24,6 +24,7 @@ export default function MyPosts() {
 
   return (
     <div className="container" style={{ marginTop: 40 }}>
+      <h1 >여기야 포스트</h1>
       <h2>내 게시글</h2>
       <div className="post-list">
         {posts.length === 0 ? (

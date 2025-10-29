@@ -65,6 +65,7 @@ export default function Header() {
                 <button onClick={() => nav("/myposts")}>내 게시글</button>
                  <button onClick={() => nav("/mycomments")}>내 댓글</button>
                 <button onClick={handleLogout}>로그아웃</button>
+                <text>관리자권한 생겨라</text>
                 {/* ✅ 관리자 메뉴 */}
                 {localStorage.getItem("role") === "admin" && (
                     <>

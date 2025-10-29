@@ -106,7 +106,7 @@ export default function PostDetail() {
 
   return (
     <div className="post-detail">
-      <h1 >여기야</h1>
+      <h1 >여기야 디테일 </h1>
       <h2>{post.title}</h2>
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
