@@ -64,6 +64,7 @@ export default function PostDetail() {
   if (!post) return <p>불러오는 중...</p>;
 
   const isOwner = post.userId === user?.id || post.User?.id === user?.id;
+  const isAdmin = localStorage.getItem("role") === "admin";
 
   return (
     <div className="post-detail">
@@ -71,16 +72,17 @@ export default function PostDetail() {
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-      {isOwner && (
-        <div className="button-group">
-          <button className="edit-btn" onClick={() => nav(`/edit/${post.id}`)}>
-            수정
-          </button>
-          <button className="delete-btn" onClick={handleDelete}>
-            삭제
-          </button>
-        </div>
-      )}
+     {(isOwner || isAdmin) && (
+  <div className="button-group">
+    <button className="edit-btn" onClick={() => nav(`/edit/${post.id}`)}>
+      수정
+    </button>
+    <button className="delete-btn" onClick={handleDelete}>
+      삭제
+    </button>
+  </div>
+)}
+
 
       {/* ✅ 댓글 영역 */}
       <div className="comments">
@@ -93,14 +95,12 @@ export default function PostDetail() {
             <div key={c.id} className="comment-item">
               <p className="comment-author">{c.User?.name}</p>
               <p className="comment-content">{c.content}</p>
-              {user?.id === c.userId && (
-                <button
-                  className="comment-delete"
-                  onClick={() => handleCommentDelete(c.id)}
-                >
-                  삭제
-                </button>
-              )}
+             {(user?.id === c.userId || localStorage.getItem("role") === "admin") && (
+              <button className="comment-delete" onClick={() => handleCommentDelete(c.id)}  >
+                삭제
+              </button>
+            )}
+
             </div>
           ))
         )}

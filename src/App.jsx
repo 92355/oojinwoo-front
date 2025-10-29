@@ -8,6 +8,7 @@ import MyPosts from "./pages/MyPosts";
 import MyComments from "./pages/MyComments";
 import AuthPage from "./pages/AuthPage";
 import AuthRoute from "./components/AuthRoute";
+import AdminPage from "./pages/AdminPage";
 
 export default function App() {
   return (
@@ -66,6 +67,14 @@ export default function App() {
         {/* 로그인 / 회원가입 */}
         <Route path="/login" element={<AuthPage />} />
       </Routes>
+      <Route
+  path="/admin"
+  element={
+    <AuthRoute>
+      <AdminPage />
+    </AuthRoute>
+  }
+/>
     </HashRouter>
   );
 }
