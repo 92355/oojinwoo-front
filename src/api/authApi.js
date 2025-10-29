@@ -10,14 +10,13 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const registerRequest = (data) => api.post("/register", data);
-
 export const loginRequest = async (data) => {
   const res = await api.post("/login", data);
   const { token, user } = res.data;
 
-  // ✅ 로그인 시 서버가 전달한 role 저장
+  // ✅ 로그인 시 토큰 + role 저장
   localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem("role", user?.role || "user");
 
   return res;
@@ -25,5 +24,4 @@ export const loginRequest = async (data) => {
 
 export const getProfile = () => api.get("/profile");
 export const deleteAccount = () => api.delete("/profile");
-
 export default api;

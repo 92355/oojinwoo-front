@@ -11,13 +11,12 @@ export default function PostDetail() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
-  const [error, setError] = useState("");
 
-  // ✅ 로그인 정보는 useEffect 안에서 안전하게 읽기
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // ✅ 로그인 정보 로드
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
@@ -32,25 +31,17 @@ export default function PostDetail() {
       setRole(null);
       setIsLoggedIn(false);
     }
-  }, []); // ✅ 최초 렌더링 때만 읽기
+  }, []);
 
-  // ✅ 게시글 & 댓글 로드
+  // ✅ 데이터 로드
   const loadPost = async () => {
-    try {
-      const { data } = await getPost(id);
-      setPost(data);
-    } catch {
-      setError("게시글을 불러올 수 없습니다.");
-    }
+    const { data } = await getPost(id);
+    setPost(data);
   };
 
   const loadComments = async () => {
-    try {
-      const { data } = await getComments(id);
-      setComments(data);
-    } catch {
-      setComments([]);
-    }
+    const { data } = await getComments(id);
+    setComments(data);
   };
 
   useEffect(() => {
@@ -58,66 +49,30 @@ export default function PostDetail() {
     loadComments();
   }, [id]);
 
-  // ✅ 댓글 작성
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    if (!commentText.trim()) return;
-    try {
-      await createComment(id, { content: commentText });
-      setCommentText("");
-      loadComments();
-    } catch {
-      alert("댓글 작성 실패");
-    }
-  };
-
-  // ✅ 댓글 삭제
-  const handleCommentDelete = async (cid) => {
-    if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
-    try {
-      await deleteComment(cid);
-      loadComments();
-    } catch {
-      alert("댓글 삭제 실패");
-    }
-  };
-
-  // ✅ 게시글 삭제
   const handleDelete = async () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
-    try {
-      await deletePost(id);
-      nav("/posts");
-    } catch {
-      alert("게시글 삭제 실패");
-    }
+    await deletePost(id);
+    nav("/posts");
   };
 
-  if (error) return <p>{error}</p>;
   if (!post) return <p>불러오는 중...</p>;
 
-  // ✅ 이제 post가 로드된 이후, 로그인 정보와 함께 권한 판별
   const isOwner =
     isLoggedIn &&
     (post.userId === user?.id || post.User?.id === user?.id);
   const isAdmin = isLoggedIn && role === "admin";
-
   const canModify = isLoggedIn && (isOwner || isAdmin);
 
   return (
     <div className="post-detail">
-      <h1 >여기야 디테일 </h1>
       <h2>{post.title}</h2>
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-      {/* ✅ 로그인 완료 후에만 버튼 판단 */}
-      {isLoggedIn && canModify && (
+      {/* ✅ 수정/삭제 버튼 */}
+      {canModify && (
         <div className="button-group">
-          <button
-            className="edit-btn"
-            onClick={() => nav(`/edit/${post.id}`)}
-          >
+          <button className="edit-btn" onClick={() => nav(`/edit/${post.id}`)}>
             수정
           </button>
           <button className="delete-btn" onClick={handleDelete}>
