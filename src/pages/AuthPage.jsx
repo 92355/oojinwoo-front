@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginRequest, registerRequest } from "../api/authApi";
 import "../styles/Login.css";
-import "../styles/AuthPage.css"; // ✅ 새 CSS 추가
+import "../styles/AuthPage.css"; 
 
 export default function AuthPage() {
   const nav = useNavigate();
-  const [isLogin, setIsLogin] = useState(true); // true: 로그인, false: 회원가입
+  const [isLogin, setIsLogin] = useState(true); 
   const [form, setForm] = useState({ username: "", password: "", name: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function AuthPage() {
 
     try {
       if (isLogin) {
-        // ✅ 로그인
+        
         const { data } = await loginRequest({
           username: form.username,
           password: form.password,
@@ -37,7 +37,7 @@ export default function AuthPage() {
         window.dispatchEvent(new Event("userChange"));
         nav("/posts");
       } else {
-        // ✅ 회원가입 → 자동 로그인
+        
         await registerRequest(form);
         const { data } = await loginRequest({
           username: form.username,

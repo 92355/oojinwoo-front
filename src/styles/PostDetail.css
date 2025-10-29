@@ -1,6 +1,4 @@
-/* ===============================
-   게시글 상세 페이지 기본 레이아웃
-================================= */
+
 .post-detail {
   max-width: 720px;
   margin: 60px auto;
@@ -39,9 +37,7 @@
   margin-bottom: 24px;
 }
 
-/* ===============================
-   수정 / 삭제 버튼 정렬
-================================= */
+
 .button-group {
   display: flex;
   justify-content: center;
@@ -94,9 +90,7 @@
   background: #d1d5db;
 }
 
-/* ===============================
-   댓글 섹션
-================================= */
+
 .comments {
   margin-top: 36px;
   border-top: 1px solid var(--border, #ddd);
@@ -161,9 +155,6 @@
   color: #b91c1c;
 }
 
-/* ===============================
-   댓글 작성 폼
-================================= */
 .comment-form {
   display: flex;
   flex-direction: row;
@@ -201,9 +192,7 @@
   margin-top: 8px;
 }
 
-/* ===============================
-   다크모드 대응
-================================= */
+
 [data-theme="dark"] .post-detail {
   background: rgba(40, 42, 50, 0.95);
   color: #f1f1f1;

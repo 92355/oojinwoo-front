@@ -9,7 +9,7 @@ export default function PostList() {
   useEffect(() => {
   const load = async () => {
     try {
-      const { data } = await getPosts(); // ✅ 비동기 호출
+      const { data } = await getPosts(); 
       console.log("📦 서버 응답 데이터:", data);
 
       setPosts(data);

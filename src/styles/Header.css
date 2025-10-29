@@ -1,4 +1,4 @@
-/* ========== 전체 헤더 구조 ========== */
+
 .header {
   width: 100%;
   background: #ffffff;
@@ -9,7 +9,7 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 본문과 같은 중앙 폭 유지 */
+
 .header-inner {
   max-width: 900px;
   margin: 0 auto;
@@ -19,11 +19,11 @@
   justify-content: space-between;
 }
 
-/* 로고 */
+
 .header-logo {
   font-size: 30px;
   font-weight: 700;
-  color: #2563eb; /* 파랑 고정 */
+  color: #2563eb;
   cursor: pointer;
   margin: 0;
   flex-shrink: 0;
@@ -31,10 +31,10 @@
 }
 
 .header-logo:hover {
-  color: #1d4ed8; /* hover 시 살짝 진한 파랑 */
+  color: #1d4ed8;
 }
 
-/* 메뉴 그룹 */
+
 .header-nav {
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
   background: rgba(37, 99, 235, 0.08);
 }
 
-/* 라이트모드 토글 버튼 */
+
 .header-nav button.theme-toggle,
 .header-nav .theme-toggle {
   margin-left: 8px;
@@ -74,7 +74,7 @@
   color: #2563eb;
 }
 
-/* 프로필 아바타 */
+
 .avatar {
   width: 36px;
   height: 36px;
@@ -96,7 +96,7 @@
   background: #1d4ed8;
 }
 
-/* 드롭다운 */
+
 .dropdown-menu {
   position: absolute;
   top: 44px;
@@ -136,7 +136,7 @@
   color: #2563eb;
 }
 
-/* ========== 다크모드 ========== */
+
 [data-theme="dark"] .header {
   background: #1e1e24;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -183,7 +183,7 @@
   color: #93c5fd;
 }
 
-/* ========== 반응형 ========== */
+
 @media (max-width: 800px) {
   .header-inner {
     max-width: 100%;

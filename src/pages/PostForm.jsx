@@ -4,14 +4,14 @@ import { createPost, getPost, updatePost } from "../api/postApi";
 import "../styles/PostList.css";
 
 export default function PostForm() {
-  const { id } = useParams(); // edit 모드일 경우 id 존재
+  const { id } = useParams(); 
   const nav = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ 수정 모드면 기존 데이터 불러오기
+  
   useEffect(() => {
     if (id) {
       (async () => {
@@ -32,12 +32,12 @@ export default function PostForm() {
 
     try {
       if (id) {
-        // ✅ 수정 모드
+        
         await updatePost(id, { title, content });
         alert("수정 완료!");
         nav(`/posts/${id}`);
       } else {
-        // ✅ 새 글 작성
+       
         await createPost({ title, content });
         alert("등록 완료!");
         nav("/posts");

@@ -16,7 +16,7 @@ export default function PostDetail() {
   const [role, setRole] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // ✅ 로그인 정보 로드
+ 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
@@ -33,7 +33,7 @@ export default function PostDetail() {
     }
   }, []);
 
-  // ✅ 게시글 & 댓글 불러오기
+ 
   const loadPost = async () => {
     try {
       const { data } = await getPost(id);
@@ -57,7 +57,7 @@ export default function PostDetail() {
     loadComments();
   }, [id]);
 
-  // ✅ 게시글 삭제
+ 
   const handleDelete = async () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
     try {
@@ -70,25 +70,25 @@ export default function PostDetail() {
     }
   };
 
-  // ✅ 댓글 등록
+  
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
       await createComment(id, { content: commentText });
       setCommentText("");
-      await loadComments(); // 새 댓글 반영
+      await loadComments();
     } catch (err) {
       console.error("댓글 등록 실패:", err);
       alert("댓글 등록 중 오류가 발생했습니다.");
     }
   };
 
-  // ✅ 댓글 삭제
+ 
   const handleCommentDelete = async (commentId) => {
     if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
     try {
       await deleteComment(commentId);
-      await loadComments(); // 삭제 후 목록 갱신
+      await loadComments(); 
     } catch (err) {
       console.error("댓글 삭제 실패:", err);
       alert("댓글 삭제 중 오류가 발생했습니다.");
@@ -97,7 +97,7 @@ export default function PostDetail() {
 
   if (!post) return <p>불러오는 중...</p>;
 
-  // ✅ 권한 판별
+  
   const isOwner =
     isLoggedIn &&
     (post.userId === user?.id || post.User?.id === user?.id);
@@ -110,7 +110,7 @@ export default function PostDetail() {
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-      {/* ✅ 수정/삭제 버튼 */}
+     
       {canModify && (
         <div className="button-group">
           <button
@@ -125,7 +125,7 @@ export default function PostDetail() {
         </div>
       )}
 
-      {/* ✅ 댓글 목록 및 작성 */}
+      
       <div className="comments">
         <h3>댓글</h3>
 

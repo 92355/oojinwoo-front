@@ -1,4 +1,4 @@
-/* ========== 공통 리스트 스타일 ========== */
+
 .post-list {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   margin-top: 20px;
 }
 
-/* 링크 전체 영역 클릭 가능하게 */
+
 .post-item-link {
   text-decoration: none;
   color: inherit;
@@ -40,7 +40,7 @@
   padding-left: 20px;
 }
 
-/* ========== 내 게시글(MyPosts)용 버튼 정렬 ========== */
+
 .mypost-item {
   display: flex;
   align-items: center;
@@ -52,7 +52,7 @@
   gap: 8px;
 }
 
-/* ========== 버튼 스타일 공통화 ========== */
+
 .edit-btn,
 .delete-btn,
 .back-btn {
@@ -92,7 +92,7 @@
   background: #d1d5db;
 }
 
-/* ========== 상세 페이지용 버튼 그룹 ========== */
+
 .button-group {
   display: flex;
   gap: 10px;

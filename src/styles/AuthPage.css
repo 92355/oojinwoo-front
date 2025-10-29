@@ -45,7 +45,7 @@
   z-index: 1;
 }
 
-/* 로그인 상태일 때 */
+
 .show-login .login-panel {
   transform: translateX(0);
   opacity: 1;
@@ -58,7 +58,7 @@
   z-index: 1;
 }
 
-/* 회원가입 상태일 때 */
+
 .show-register .login-panel {
   transform: translateX(-100%);
   opacity: 0;

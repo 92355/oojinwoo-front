@@ -11,7 +11,7 @@ export default function Header() {
   const [role, setRole] = useState(null);
   const [open, setOpen] = useState(false);
 
-  // ✅ 로그인 정보 로드 및 동기화
+ 
   useEffect(() => {
     const loadUser = () => {
       const savedUser = localStorage.getItem("user");
@@ -29,7 +29,7 @@ export default function Header() {
     };
   }, []);
 
-  // ✅ 외부 클릭 시 드롭다운 닫기
+  
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
@@ -49,12 +49,12 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-inner">
-        {/* ✅ 로고 */}
+       
         <h1 className="header-logo" onClick={() => nav("/")}>
           OOJINWOO
         </h1>
 
-        {/* ✅ 네비게이션 + 프로필 묶음 */}
+       
         <div className="nav-group">
           <nav className="header-nav">
             <Link to="/posts">목록</Link>
@@ -98,7 +98,7 @@ export default function Header() {
             ) : (
               <Link to="/login">로그인 / 회원가입</Link>
             )}
-            {/* ✅ 테마 토글은 nav 옆으로 분리 */}
+            
           <ThemeToggle />
           </nav>
 

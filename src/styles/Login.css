@@ -1,6 +1,4 @@
-/* =====================
-   Glassmorphism Login UI (Light & Dark mode)
-===================== */
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +10,7 @@
   transition: background 0.4s ease;
 }
 
-/* 🎨 공통 카드 스타일 */
+
 .login-card {
   backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
@@ -26,7 +24,7 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 🌞 라이트모드 카드 */
+
 :root,
 [data-theme="light"] {
   --page-bg: linear-gradient(135deg, #f5f5f7, #e2e3e8);
@@ -42,7 +40,7 @@
   color: var(--text);
 }
 
-/* 🌙 다크모드 카드 */
+
 [data-theme="dark"] {
   --page-bg: linear-gradient(135deg, #1a1c22, #0e1015);
   --card-bg: rgba(30, 33, 41, 0.6);
