@@ -13,11 +13,28 @@ export default function PostDetail() {
   const [commentText, setCommentText] = useState("");
   const [error, setError] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-  const isLoggedIn = !!token;
+  // ✅ 로그인 정보는 useEffect 안에서 안전하게 읽기
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+
+    if (storedToken && storedUser) {
+      setUser(JSON.parse(storedUser));
+      setRole(storedRole);
+      setIsLoggedIn(true);
+    } else {
+      setUser(null);
+      setRole(null);
+      setIsLoggedIn(false);
+    }
+  }, []); // ✅ 최초 렌더링 때만 읽기
+
+  // ✅ 게시글 & 댓글 로드
   const loadPost = async () => {
     try {
       const { data } = await getPost(id);
@@ -41,6 +58,7 @@ export default function PostDetail() {
     loadComments();
   }, [id]);
 
+  // ✅ 댓글 작성
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!commentText.trim()) return;
@@ -53,6 +71,7 @@ export default function PostDetail() {
     }
   };
 
+  // ✅ 댓글 삭제
   const handleCommentDelete = async (cid) => {
     if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
     try {
@@ -63,6 +82,7 @@ export default function PostDetail() {
     }
   };
 
+  // ✅ 게시글 삭제
   const handleDelete = async () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
     try {
@@ -76,7 +96,7 @@ export default function PostDetail() {
   if (error) return <p>{error}</p>;
   if (!post) return <p>불러오는 중...</p>;
 
-  // 🔐 post가 로드된 이후에만 권한 판별
+  // ✅ 이제 post가 로드된 이후, 로그인 정보와 함께 권한 판별
   const isOwner =
     isLoggedIn &&
     (post.userId === user?.id || post.User?.id === user?.id);
@@ -90,8 +110,8 @@ export default function PostDetail() {
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-      {/* ✅ 수정/삭제 버튼 - post가 존재하고 로그인 되어 있을 때만 */}
-      {post && canModify && (
+      {/* ✅ 로그인 완료 후에만 버튼 판단 */}
+      {isLoggedIn && canModify && (
         <div className="button-group">
           <button
             className="edit-btn"
@@ -105,7 +125,6 @@ export default function PostDetail() {
         </div>
       )}
 
-      {/* ✅ 댓글 영역 */}
       <div className="comments">
         <h3>댓글</h3>
 
