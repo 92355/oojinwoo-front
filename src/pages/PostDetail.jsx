@@ -8,19 +8,16 @@ export default function PostDetail() {
   const { id } = useParams();
   const nav = useNavigate();
 
-  // 상태
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [error, setError] = useState("");
 
-  // 로그인 사용자 정보
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   const isLoggedIn = !!token;
 
-  // 게시글 & 댓글 불러오기
   const loadPost = async () => {
     try {
       const { data } = await getPost(id);
@@ -44,7 +41,6 @@ export default function PostDetail() {
     loadComments();
   }, [id]);
 
-  // 댓글 작성
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!commentText.trim()) return;
@@ -57,7 +53,6 @@ export default function PostDetail() {
     }
   };
 
-  // 댓글 삭제
   const handleCommentDelete = async (cid) => {
     if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
     try {
@@ -68,7 +63,6 @@ export default function PostDetail() {
     }
   };
 
-  // 게시글 삭제
   const handleDelete = async () => {
     if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
     try {
@@ -79,15 +73,16 @@ export default function PostDetail() {
     }
   };
 
-  // 로딩 / 에러 처리
   if (error) return <p>{error}</p>;
   if (!post) return <p>불러오는 중...</p>;
 
-  // 🔑 권한 판별
+  // 🔐 post가 로드된 이후에만 권한 판별
   const isOwner =
     isLoggedIn &&
     (post.userId === user?.id || post.User?.id === user?.id);
   const isAdmin = isLoggedIn && role === "admin";
+
+  const canModify = isLoggedIn && (isOwner || isAdmin);
 
   return (
     <div className="post-detail">
@@ -95,8 +90,8 @@ export default function PostDetail() {
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
 
-      {/* ✅ 수정/삭제 버튼 (로그인 + 권한) */}
-      {isLoggedIn && (isOwner || isAdmin) && (
+      {/* ✅ 수정/삭제 버튼 - post가 존재하고 로그인 되어 있을 때만 */}
+      {post && canModify && (
         <div className="button-group">
           <button
             className="edit-btn"
@@ -119,8 +114,7 @@ export default function PostDetail() {
         ) : (
           comments.map((c) => {
             const canDeleteComment =
-              isLoggedIn &&
-              (user?.id === c.userId || isAdmin);
+              isLoggedIn && (user?.id === c.userId || isAdmin);
             return (
               <div key={c.id} className="comment-item">
                 <p className="comment-author">{c.User?.name}</p>
@@ -138,7 +132,6 @@ export default function PostDetail() {
           })
         )}
 
-        {/* ✅ 댓글 작성 폼 */}
         {isLoggedIn ? (
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <input
@@ -151,9 +144,7 @@ export default function PostDetail() {
             <button className="edit-btn">등록</button>
           </form>
         ) : (
-          <p className="login-hint">
-            💡 로그인 후 댓글을 작성할 수 있습니다.
-          </p>
+          <p className="login-hint">💡 로그인 후 댓글을 작성할 수 있습니다.</p>
         )}
       </div>
     </div>
