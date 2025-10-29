@@ -91,7 +91,7 @@ input, textarea {
 
 /* 모바일 최적화 */
 @media (max-width: 480px) {
-  button:not(.comment-form) {
+  button:not(.comment-form button) {
     width: 100%;
   }
 }
