@@ -106,6 +106,7 @@ export default function PostDetail() {
 
   return (
     <div className="post-detail">
+      <h1 >여기야</h1>
       <h2>{post.title}</h2>
       <p className="author">✍️ 작성자: {post.User?.name}</p>
       <div className="content">{post.content}</div>
@@ -166,7 +167,7 @@ export default function PostDetail() {
           <p className="login-hint">💡 로그인 후 댓글을 작성할 수 있습니다.</p>
           
         )}
-        <p >여기야</p>
+        
       </div>
     </div>
   );
