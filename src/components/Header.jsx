@@ -65,8 +65,8 @@ export default function Header() {
 
         {/* ✅ 네비게이션 */}
         <nav className="header-nav">
-          <Link to="/posts">게시글</Link>
-          <Link to="/write">등록</Link>
+          <Link to="/posts">목록</Link>
+          <Link to="/write">글쓰기</Link>
 
           {user ? (
             <div className="dropdown" ref={ref}>

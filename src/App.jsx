@@ -9,17 +9,13 @@ import MyComments from "./pages/MyComments";
 import Profile from "./pages/Profile";
 import AuthRoute from "./components/AuthRoute";
 import AdminPage from "./pages/AdminPage";
-import PostWrite from "./pages/PostWrite";   // ✅ 새 글 작성 페이지
-import PostEdit from "./pages/PostEdit";     // ✅ 글 수정 페이지
+import PostForm from "./pages/PostForm"; // ✅ 추가
 
 export default function App() {
   return (
     <HashRouter>
       <Header />
       <Routes>
-        <Route path="/write" element={<AuthRoute><PostWrite /></AuthRoute>} />
-        <Route path="/edit/:id" element={<AuthRoute><PostEdit /></AuthRoute>} />
-
         {/* ✅ 메인 페이지 */}
         <Route path="/" element={<PostList />} />
 
@@ -28,11 +24,11 @@ export default function App() {
 
         {/* ✅ 게시글 상세 페이지 */}
         <Route path="/posts/:id" element={<PostDetail />} />
-        
-        {/* ✅ 글쓰기 / 수정 페이지 추가 */}
-        <Route path="/write" element={<AuthRoute><PostWrite /></AuthRoute>} />
-        <Route path="/edit/:id" element={<AuthRoute><PostEdit /></AuthRoute>} />
 
+         {/* ✅ PostForm을 글쓰기/수정 모두에 재사용 */}
+        <Route path="/write" element={<AuthRoute><PostForm /></AuthRoute>} />
+        <Route path="/edit/:id" element={<AuthRoute><PostForm /></AuthRoute>} />
+        
         {/* ✅ 인증 관련 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
