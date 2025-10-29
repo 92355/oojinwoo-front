@@ -1,17 +1,18 @@
 /* ========== 전체 헤더 구조 ========== */
 .header {
   width: 100%;
-  background: var(--bg, #f9f9f9);
-  border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.1));
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 20;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 본문과 같은 중앙 폭을 유지 */
+/* 본문과 같은 중앙 폭 유지 */
 .header-inner {
-  max-width: 900px;           /* ✅ 게시글 목록과 동일한 폭 */
-  margin: 0 auto;             /* ✅ 중앙 정렬 */           
+  max-width: 900px;
+  margin: 0 auto;
   padding: 14px 150px 20px 110px;
   display: flex;
   align-items: center;
@@ -22,37 +23,55 @@
 .header-logo {
   font-size: 30px;
   font-weight: 700;
-  color: var(--primary, #2563eb);
+  color: #2563eb; /* 파랑 고정 */
   cursor: pointer;
   margin: 0;
   flex-shrink: 0;
-  
+  transition: color 0.3s ease;
 }
 
-/* 메뉴 그룹 오른쪽 정렬 */
+.header-logo:hover {
+  color: #1d4ed8; /* hover 시 살짝 진한 파랑 */
+}
+
+/* 메뉴 그룹 */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px; /* 메뉴 간 간격 */
+  gap: 18px;
 }
 
-.header-nav button.theme-toggle,
-.header-nav .theme-toggle {
-  margin-left: 8px; /* ✅ 글자와 살짝 띄우기 */
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-/* 링크 스타일 */
 .header-nav a {
   text-decoration: none;
-  color: var(--text, #222);
+  color: #222;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease;
+  padding: 6px 8px;
+  border-radius: 6px;
 }
 
 .header-nav a:hover {
-  color: var(--primary, #2563eb);
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* 라이트모드 토글 버튼 */
+.header-nav button.theme-toggle,
+.header-nav .theme-toggle {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+  color: #222;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header-nav .theme-toggle:hover {
+  background: rgba(37, 99, 235, 0.15);
+  color: #2563eb;
 }
 
 /* 프로필 아바타 */
@@ -60,7 +79,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--primary, #2563eb);
+  background: #2563eb;
   color: #fff;
   font-weight: 600;
   font-size: 16px;
@@ -69,21 +88,23 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  background: #1d4ed8;
 }
 
 /* 드롭다운 */
-.dropdown {
-  position: relative;
-}
-
 .dropdown-menu {
   position: absolute;
   top: 44px;
   right: 0;
-  background: var(--card, rgba(255, 255, 255, 0.97));
-  border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   min-width: 160px;
   display: flex;
   flex-direction: column;
@@ -100,20 +121,67 @@
   pointer-events: auto;
 }
 
-/* ✅ 다크모드 대응 */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu button:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+/* ========== 다크모드 ========== */
 [data-theme="dark"] .header {
-  background: #1a1c22;
+  background: #1e1e24;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .header-logo {
+  color: #60a5fa;
+}
+
 [data-theme="dark"] .header-nav a {
-  color: #f1f1f1;
+  color: #e5e5e5;
+}
+
+[data-theme="dark"] .header-nav a:hover {
+  color: #93c5fd;
+  background: rgba(147, 197, 253, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e5e5e5;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(147, 197, 253, 0.2);
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .avatar {
+  background: #60a5fa;
 }
 
 [data-theme="dark"] .dropdown-menu {
-  background: rgba(30, 33, 41, 0.98);
-  color: #f1f1f1;
+  background: #2a2a32;
   border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .dropdown-menu button {
+  color: #e5e5e5;
+}
+
+[data-theme="dark"] .dropdown-menu button:hover {
+  background: rgba(147, 197, 253, 0.1);
+  color: #93c5fd;
 }
 
 /* ========== 반응형 ========== */
@@ -124,7 +192,7 @@
   }
 
   .header-logo {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   .header-nav {
@@ -141,7 +209,7 @@
   }
 
   .header-logo {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .header-nav {
