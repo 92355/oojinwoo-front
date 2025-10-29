@@ -1,215 +1,56 @@
-/* ========== 전체 헤더 구조 ========== */
-.header {
-  width: 100%;
-  background: var(--bg, #f9f9f9);
-  border-bottom: 1px solid var(--border, rgba(0, 0, 0, 0.1));
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.header-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 12px 20px;
+/* nav-group: 네비게이션 + 아바타 + 토글 묶음 */
+.nav-group {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 
-.header-logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary, #2563eb);
-  cursor: pointer;
-  margin: 0;
-}
-
-/* ========== 네비게이션 정렬 ========== */
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-nav a {
-  text-decoration: none;
-  color: var(--text, #222);
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.header-nav a:hover {
-  color: var(--primary, #2563eb);
-}
-
-/* ========== 아바타 & 드롭다운 ========== */
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--primary, #2563eb);
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.2s ease;
-}
-
-.avatar:hover {
-  transform: scale(1.05);
-}
-
-/* 드롭다운 기본 상태 */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 44px;
-  right: 0;
-  background: var(--card, rgba(255, 255, 255, 0.97));
-  border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 160px;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 50;
-}
-
-/* 드롭다운 열림 상태 */
-.dropdown-menu.open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.dropdown-user {
-  padding: 10px 14px;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.dropdown-menu button {
-  background: none;
-  border: none;
-  text-align: left;
-  padding: 8px 14px;
-  width: 100%;
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--text, #222);
-  transition: background 0.2s ease;
-}
-
-.dropdown-menu button:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-/* ========== 다크모드 대응 ========== */
-[data-theme="dark"] .header {
-  background: #1a1c22;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .header-nav a {
-  color: #f1f1f1;
-}
-
-[data-theme="dark"] .dropdown-menu {
-  background: rgba(30, 33, 41, 0.98);
-  color: #f1f1f1;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .dropdown-menu button:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* ========== 반응형 ========== */
-@media (max-width: 600px) {
+/* 반응형 추가 */
+@media (max-width: 768px) {
   .header-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
+  }
+
+  .nav-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
   }
 
   .header-nav {
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
     gap: 10px;
   }
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
 
-.avatar {
-  background-color: #0078ff;
-  color: white;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  text-align: center;
-  line-height: 36px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 45px;
-  right: 0;
-  background: var(--bg-secondary);
-  border-radius: 10px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  min-width: 160px;
-  z-index: 100;
-}
-
-.dropdown-menu.open {
-  display: flex;
-}
-
-.dropdown-menu button {
-  padding: 8px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  text-align: left;
-  cursor: pointer;
-}
-
-.dropdown-menu button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-/* ========== 초소형 화면 (모바일 400px 이하) ========== */
-@media (max-width: 400px) {
-  .header-logo {
-    font-size: 16px;
+  .header-nav a {
+    font-size: 14px;
+    padding: 4px 6px;
   }
 
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+  }
+
+  .dropdown-menu {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 400px) {
   .header-nav {
     flex-direction: column;
     align-items: center;
     gap: 6px;
-  }
-
-  .header-nav a {
-    font-size: 13px;
   }
 }

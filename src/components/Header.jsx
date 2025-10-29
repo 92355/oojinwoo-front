@@ -7,46 +7,37 @@ export default function Header() {
   const nav = useNavigate();
   const ref = useRef(null);
 
-  // ✅ 사용자 및 role 상태
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [open, setOpen] = useState(false);
 
   // ✅ 로그인 정보 로드 및 동기화
   useEffect(() => {
-  const loadUser = () => {
-    const savedUser = localStorage.getItem("user");
-    const savedRole = localStorage.getItem("role");
-    setUser(savedUser ? JSON.parse(savedUser) : null);
-    setRole(savedRole || null);
-  };
+    const loadUser = () => {
+      const savedUser = localStorage.getItem("user");
+      const savedRole = localStorage.getItem("role");
+      setUser(savedUser ? JSON.parse(savedUser) : null);
+      setRole(savedRole || null);
+    };
 
-  loadUser();
-
-  // ✅ storage 이벤트 (다른 탭)
-  window.addEventListener("storage", loadUser);
-  // ✅ custom 이벤트 (같은 탭)
-  window.addEventListener("userChange", loadUser);
-
-  return () => {
-    window.removeEventListener("storage", loadUser);
-    window.removeEventListener("userChange", loadUser);
-  };
-}, []);
-
+    loadUser();
+    window.addEventListener("storage", loadUser);
+    window.addEventListener("userChange", loadUser);
+    return () => {
+      window.removeEventListener("storage", loadUser);
+      window.removeEventListener("userChange", loadUser);
+    };
+  }, []);
 
   // ✅ 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false);
-      }
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ 로그아웃 처리
   const handleLogout = () => {
     localStorage.clear();
     setUser(null);
@@ -63,57 +54,55 @@ export default function Header() {
           OOJINWOO
         </h1>
 
-        {/* ✅ 네비게이션 */}
-        <nav className="header-nav">
-          <Link to="/posts">목록</Link>
-          <Link to="/write">글쓰기</Link>
+        {/* ✅ 네비게이션 + 프로필 묶음 */}
+        <div className="nav-group">
+          <nav className="header-nav">
+            <Link to="/posts">목록</Link>
+            <Link to="/write">글쓰기</Link>
 
-          {user ? (
-            <div className="dropdown" ref={ref}>
-              {/* 프로필 아이콘 */}
-              <div
-                className="avatar"
-                onClick={() => setOpen((prev) => !prev)}
-                title={user.name}
-              >
-                {user.name.charAt(0).toUpperCase()}
-              </div>
-
-              {/* ✅ 드롭다운 메뉴 */}
-              {open && (
-                <div className="dropdown-menu open">
-                  <div className="dropdown-user">{user.name}</div>
-                  <button onClick={() => nav("/profile")}>내 프로필</button>
-                  <button onClick={() => nav("/myposts")}>내 게시글</button>
-                  <button onClick={() => nav("/mycomments")}>내 댓글</button>
-
-                  {/* ✅ 관리자 전용 메뉴 */}
-                  {role === "admin" && (
-                    <>
-                      <hr style={{ margin: "6px 0" }} />
-                      <button onClick={() => nav("/admin")}>
-                        관리자 페이지
-                      </button>
-                    </>
-                  )}
-
-                  <hr style={{ margin: "6px 0" }} />
-                  <button onClick={handleLogout}>로그아웃</button>
-                  <button
-                    style={{ color: "crimson" }}
-                    onClick={() => nav("/profile")}
-                  >
-                    회원탈퇴
-                  </button>
+            {user ? (
+              <div className="dropdown" ref={ref}>
+                <div
+                  className="avatar"
+                  onClick={() => setOpen((prev) => !prev)}
+                  title={user.name}
+                >
+                  {user.name.charAt(0).toUpperCase()}
                 </div>
-              )}
-            </div>
-          ) : (
-            <Link to="/login">로그인 / 회원가입</Link>
-          )}
 
+                {open && (
+                  <div className="dropdown-menu open">
+                    <div className="dropdown-user">{user.name}</div>
+                    <button onClick={() => nav("/profile")}>내 프로필</button>
+                    <button onClick={() => nav("/myposts")}>내 게시글</button>
+                    <button onClick={() => nav("/mycomments")}>내 댓글</button>
+                    {role === "admin" && (
+                      <>
+                        <hr style={{ margin: "6px 0" }} />
+                        <button onClick={() => nav("/admin")}>
+                          관리자 페이지
+                        </button>
+                      </>
+                    )}
+                    <hr style={{ margin: "6px 0" }} />
+                    <button onClick={handleLogout}>로그아웃</button>
+                    <button
+                      style={{ color: "crimson" }}
+                      onClick={() => nav("/profile")}
+                    >
+                      회원탈퇴
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login">로그인 / 회원가입</Link>
+            )}
+          </nav>
+
+          {/* ✅ 테마 토글은 nav 옆으로 분리 */}
           <ThemeToggle />
-        </nav>
+        </div>
       </div>
     </header>
   );
