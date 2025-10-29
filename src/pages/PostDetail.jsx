@@ -164,7 +164,9 @@ export default function PostDetail() {
           </form>
         ) : (
           <p className="login-hint">💡 로그인 후 댓글을 작성할 수 있습니다.</p>
+          
         )}
+        <p >여기야</p>
       </div>
     </div>
   );
