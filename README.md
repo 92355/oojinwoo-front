@@ -8,7 +8,6 @@
 ## 🚀 배포 링크
 
 - **Frontend:** [https://92355.github.io/oojinwoo-front-main](https://92355.github.io/oojinwoo-front-main/)
-- **Backend (API):** [https://oojinwoo-server.onrender.com/api](https://oojinwoo-server.onrender.com/api)
 
 ---
 
